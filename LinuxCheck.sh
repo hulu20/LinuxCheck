@@ -456,19 +456,19 @@ echo -e "\n" | tee -a $filename
 #Rkhunter查杀
 echo -e "\e[00;31m[+]Rkhunter查杀\e[00m" | tee -a $filename
 if rkhunter >/dev/null 2>&1; then
-    rkhunter --checkall --sk | ag -v 'OK|Not found|None found'
+    rkhunter --checkall --sk | ag -v 'OK|Not found|None found' | tee -a $filename
 else
     if [ -e "rkhunter.tar.gz" ]; then
         tar -zxvf rkhunter.tar.gz >/dev/null 2>&1
         cd rkhunter-1.4.6/
         ./installer.sh --install >/dev/null 2>&1
-        rkhunter --checkall --sk | ag -v 'OK|Not found|None found'
+        rkhunter --checkall --sk | ag -v 'OK|Not found|None found' | tee -a $filename
     else
         echo -e "找不到rkhunter.tar.gz尝试下载"
         wget https://github.com/al0ne/LinuxCheck/raw/master/rkhunter.tar.gz >/dev/null 2>&1
         tar -zxvf rkhunter.tar.gz >/dev/null 2>&1
         cd rkhunter-1.4.6/
         ./installer.sh --install >/dev/null 2>&1
-        rkhunter --checkall --sk | ag -v 'OK|Not found|None found'
+        rkhunter --checkall --sk | ag -v 'OK|Not found|None found' | tee -a $filename
     fi
 fi
