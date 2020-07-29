@@ -2,12 +2,13 @@
 
 echo ""
 echo " ========================================================= "
-echo " \                 Linux应急响应/信息搜集脚本 V2.1             / "
+echo " \                 Linux应急响应/信息搜集脚本 V2.1         / "
 echo " ========================================================= "
-echo " # 支持Centos、Debian系统检测                    "
-echo " # author：al0ne                    "
-echo " # https://github.com/al0ne                    "
-echo " # 更新日期：2020年6月20日                    "
+echo " # 支持Centos、Debian系统检测                               "
+echo " # 原author：al0ne                                         "
+echo " # 原项目：https://github.com/al0ne                        "
+echo " # 对项目做了细微优化处理                                   "
+echo " # 更新日期：2020年7月29日                                  "
 echo -e "\n"
 
 # WEB Path
@@ -451,7 +452,7 @@ ag -G ".+\.asp" -l -i -s '<%@codepage=65000[\s\S]*=936:|<%eval\srequest\(\"|<%@\
 echo -e "\n" | tee -a $filename
 #挖矿木马检测
 echo -e "\e[00;31m[+]挖矿木马检测\e[00m" | tee -a $filename
-ps aux | ag "systemctI|kworkerds|init10.cfg|wl.conf|crond64|watchbog|sustse|donate|proxkekman|test.conf|/var/tmp/apple|/var/tmp/big|/var/tmp/small|/var/tmp/cat|/var/tmp/dog|/var/tmp/mysql|/var/tmp/sishen|ubyx|cpu.c|tes.conf|psping|/var/tmp/java-c|pscf|cryptonight|sustes|xmrig|xmr-stak|suppoie|ririg|/var/tmp/ntpd|/var/tmp/ntp|/var/tmp/qq|/tmp/qq|/var/tmp/aa|gg1.conf|hh1.conf|apaqi|dajiba|/var/tmp/look|/var/tmp/nginx|dd1.conf|kkk1.conf|ttt1.conf|ooo1.conf|ppp1.conf|lll1.conf|yyy1.conf|1111.conf|2221.conf|dk1.conf|kd1.conf|mao1.conf|YB1.conf|2Ri1.conf|3Gu1.conf|crant|nicehash|linuxs|linuxl|Linux|crawler.weibo|stratum|gpg-daemon|jobs.flu.cc|cranberry|start.sh|watch.sh|krun.sh|killTop.sh|cpuminer|/60009|ssh_deny.sh|clean.sh|\./over|mrx1|redisscan|ebscan|barad_agent|\.sr0|clay|udevs|\.sshd|/tmp/init|xmr|xig|ddgs|minerd|hashvault|geqn|\.kthreadd|httpdz|pastebin.com|sobot.com|kerbero|2t3ik|ddgs|qW3xt|ztctb" | ag -v 'ag' | tee -a $filename
+ps aux | ag "systemctI|kworkerds|init10.cfg|wl.conf|crond64|watchbog|sustse|donate|proxkekman|test.conf|/var/tmp/apple|/var/tmp/big|/var/tmp/small|/var/tmp/cat|/var/tmp/dog|/var/tmp/mysql|/var/tmp/sishen|ubyx|cpu.c|tes.conf|psping|/var/tmp/java-c|pscf|cryptonight|sustes|xmrig|xmr-stak|suppoie|ririg|/var/tmp/ntpd|/var/tmp/ntp|/var/tmp/qq|/tmp/qq|/var/tmp/aa|gg1.conf|hh1.conf|apaqi|dajiba|/var/tmp/look|/var/tmp/nginx|dd1.conf|kkk1.conf|ttt1.conf|ooo1.conf|ppp1.conf|lll1.conf|yyy1.conf|1111.conf|2221.conf|dk1.conf|kd1.conf|mao1.conf|YB1.conf|2Ri1.conf|3Gu1.conf|crant|nicehash|linuxs|linuxl|Linux|crawler.weibo|stratum|gpg-daemon|jobs.flu.cc|cranberry|start.sh|watch.sh|krun.sh|killTop.sh|cpuminer|/60009|ssh_deny.sh|clean.sh|\./over|mrx1|redisscan|ebscan|barad_agent|\.sr0|clay|udevs|\.sshd|/tmp/init|xmr|xig|ddgs|minerd|hashvault|geqn|\.kthreadd|httpdz|pastebin.com|sobot.com|kerbero|2t3ik|ddgs|qW3xt|ztctb" | ag -v "ag|$0" | tee -a $filename
 echo -e "\n" | tee -a $filename
 #Rkhunter查杀
 echo -e "\e[00;31m[+]Rkhunter查杀\e[00m" | tee -a $filename
