@@ -87,11 +87,23 @@ else
 
 fi
 
+# 检测rkhunter有没有安装
+if rkhunter -V >/dev/null 2>&1; then
+    echo -e "\e[00;32mrkhunter已安装 \e[00m"
+else
+    if [ $OS = 'Centos' ]; then
+        yum -y install rkhunter >/dev/null 2>&1
+    else
+        apt-get -y install rkhunter >/dev/null 2>&1
+    fi
+
+fi
+
 echo -e "\n"
 
 # 设置保存文件
-interface=$(cat /etc/network/interfaces | ag '(?<=\biface\b).*(?=\binet\b)' | ag -v 'lo|docker' | awk '{print $2}' | head -n 1)
-ipaddress=$(ifconfig $interface | ag -o '(?<=inet |inet addr:)\d+\.\d+\.\d+\.\d+' | ag -v '127.0.0.1' | head -n 1)
+#interface=$(cat /etc/network/interfaces | ag '(?<=\biface\b).*(?=\binet\b)' | ag -v 'lo|docker' | awk '{print $2}' | head -n 1)
+ipaddress=$(ip addr | ag -o '(?<=inet |inet addr:)\d+\.\d+\.\d+\.\d+' | ag -v '127.0.0.1' | head -n 1)
 filename=$ipaddress'_'$(hostname)'_'$(whoami)'_'$(date +%s)'.log'
 
 #对比hash，看看有没有系统文件被替换掉
@@ -318,7 +330,7 @@ echo -e "\n" | tee -a $filename
 #运行服务
 echo -e "\e[00;31m[+]Service \e[00m" | tee -a $filename
 if [ $OS = 'Centos' ]; then
-s    systemctl -l|grep running|awk '{print $1}' | tee -a $filename
+    systemctl -l|grep running|awk '{print $1}' | tee -a $filename
 else
     service --status-all | ag -Q '+' --nocolor | tee -a $filename
 fi
